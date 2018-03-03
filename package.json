@@ -1,17 +1,29 @@
 {
   "name": "vzl",
+  "productName": "Vzl",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
     "start": "electron ./app/main/index.js"
   },
   "author": "Vu Tran <vu@vu-tran.com>",
   "license": "MIT",
+  "homepage": "https://github.com/vutran/vzl",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vutran/vzl"
+  },
   "devDependencies": {
-    "electron": "^1.8.2"
+    "electron": "^1.8.2",
+    "electron-builder": "^20.2.0"
   },
   "dependencies": {
     "viz.js": "^1.8.0"
+  },
+  "build": {
+    "appId": "com.vutran.vzl"
   }
 }
