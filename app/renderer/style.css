@@ -1,0 +1,42 @@
+* {
+    -webkit-user-select: none;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-size: 12pt;
+    font-family: Arial;
+}
+
+.sep {
+    border-left: 1px solid #ccc;
+    width: 0px;
+    height: 100vh;
+}
+
+#app {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+}
+
+#editor {
+    padding: 50px 30px;
+    width: 50%;
+    height: 100%;
+    border: 0px;
+    outline: 0px;
+}
+
+#preview {
+    padding: 50px 30px;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    align-items: center;
+    text-align: center;
+}
