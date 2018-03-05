@@ -72,6 +72,14 @@ function createWindow() {
             ],
         },
         {
+            label: 'Edit',
+            role: 'editMenu',
+        },
+        {
+            label: 'Window',
+            role: 'windowMenu',
+        },
+        {
             label: 'Help',
             submenu: [
                 {
