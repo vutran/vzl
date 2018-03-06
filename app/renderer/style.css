@@ -12,12 +12,6 @@ html, body {
     padding: 0px;
 }
 
-.sep {
-    border-left: 1px solid #ccc;
-    width: 0px;
-    height: calc(100vh - 40px);
-}
-
 #app {
     display: flex;
     flex-direction: column;
