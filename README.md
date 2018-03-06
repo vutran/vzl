@@ -1,6 +1,6 @@
-<p align="center">
-    <h1>Vzl</h1>
-</p>
+<h1 align="center">Vzl</h1>
+
+---
 
 ## Screenshots
 
@@ -19,6 +19,10 @@
 ## Contribute
 
 Please refer to [CONTRIBUTING.md](./CONTRIBUTING.md) for more information.
+
+## Support
+
+Like what you see? [Become a Patron](https://www.patreon.com/vutran) and support me via a monthly donation.
 
 ## Special Thanks
 
