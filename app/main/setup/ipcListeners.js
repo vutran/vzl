@@ -3,12 +3,12 @@ const { ipcMain } = require('electron');
 const file = require('../utils/file');
 
 module.exports = (app, appState) => {
-  ipcMain.on('update', (evt, fo) => {
+  ipcMain.on('update', (evt, source) => {
     try {
-      file.update(fo.file, fo.source, app, appState);
+      file.update(source, app, appState);
 
       // sends the new svg preview back to renderer
-      appState.svg = Viz(appState.currentSource);
+      appState.svg = Viz(appState.fo.source);
       evt.sender.send('preview', appState.svg);
     } catch (err) {}
   });

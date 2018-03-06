@@ -21,35 +21,21 @@ body {
 #nav {
   list-style-type: none;
   height: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 80px;
 }
 
-#opened-files {
-  height: 100%;
-  list-style-type: none;
-  display: flex;
-  flex-direction: row;
-  font-size: 9pt;
+#title {
   margin: 0px;
-  padding: 0px 0px 0px 80px;
-  align-items: center;
-  border-bottom: 1px solid #ddd;
-}
-
-#opened-files li {
+  font-size: 9pt;
+  font-weight: 300;
+  text-align: center;
   display: flex;
-  align-items: center;
   height: 100%;
-  padding-left: 30px;
-  padding-right: 30px;
-  border-left: 1px solid #ddd;
-}
-
-#opened-files li.active {
-  background-color: #cdcdcd;
-}
-
-#opened-files li:last-child {
-  border-right: 1px solid #ddd;
+  flex-direction: row;
+  align-items: center;
 }
 
 #app-panes {

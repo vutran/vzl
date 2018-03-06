@@ -23,12 +23,8 @@ module.exports = (app, appState) => {
           label: 'Save',
           accelerator: 'CommandOrControl+S',
           click() {
-            if (appState.currentFile && appState.currentSource !== null) {
-              fs.writeFileSync(
-                appState.currentFile,
-                appState.currentSource,
-                'utf8'
-              );
+            if (appState.fo.file && appState.fo.source !== null) {
+              fs.writeFileSync(appState.fo.file, appState.fo.source, 'utf8');
             }
           },
         },
@@ -42,20 +38,14 @@ module.exports = (app, appState) => {
                   appState.mainWindow,
                   { defaultPath: 'Untitled.svg' },
                   filename => {
-                    if (filename && svg) {
-                      fs.writeFile(filename, svg);
+                    if (filename && appState.svg) {
+                      fs.writeFile(filename, appState.svg);
                     }
                   }
                 );
               },
             },
           ],
-        },
-        {
-          label: 'Close File',
-          click() {
-            file.close();
-          },
         },
         {
           label: 'Quit',

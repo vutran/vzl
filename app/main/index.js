@@ -7,11 +7,11 @@ const setupMenu = require('./setup/menu');
 const appState = {
   svg: null, // the currently rendered svg
   mainWindow: null, // the main window instance
-  currentSource: null, // the currently opened file source
-  currentFile: null, // the currently opened file
-
-  // can't send Sets through IPC
-  openedFiles: [], // list of opened files (dict: { file, source })
+  fo: {
+    // the currently opened file
+    file: null, // path to file
+    source: null, // text source
+  },
 };
 
 function createWindow() {
