@@ -1,6 +1,7 @@
 const fs = require('fs');
 const { Menu, dialog, shell } = require('electron');
 const pkg = require('../../../package.json');
+const file = require('../utils/file');
 
 module.exports = (app, appState) => {
   const menu = Menu.buildFromTemplate([
@@ -13,15 +14,7 @@ module.exports = (app, appState) => {
           click() {
             dialog.showOpenDialog(appState.mainWindow, filepaths => {
               if (filepaths.length > 0) {
-                appState.currentFile = filepaths[0];
-                appState.currentSrc = fs.readFileSync(
-                  appState.currentFile,
-                  'utf8'
-                );
-                appState.mainWindow.webContents.send(
-                  'open',
-                  appState.currentSrc
-                );
+                file.open(filepaths[0], app, appState);
               }
             });
           },
@@ -61,9 +54,7 @@ module.exports = (app, appState) => {
         {
           label: 'Close File',
           click() {
-            currentSource = null;
-            currentFile = null;
-            appState.mainWindow.webContents.send('close');
+            file.close();
           },
         },
         {

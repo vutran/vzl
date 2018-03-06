@@ -9,12 +9,17 @@ const appState = {
   mainWindow: null, // the main window instance
   currentSource: null, // the currently opened file source
   currentFile: null, // the currently opened file
+
+  // can't send Sets through IPC
+  openedFiles: [], // list of opened files (dict: { file, source })
 };
 
 function createWindow() {
   setupIpcListeners(app, appState);
   setupWindow(app, appState);
   setupMenu(app, appState);
+
+  appState.mainWindow.webContents.openDevTools();
 }
 
 app.on('ready', createWindow);
