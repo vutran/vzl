@@ -3,7 +3,7 @@
   "productName": "Vzl",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app/main/index.js",
   "scripts": {
     "precommit": "lint-staged",
     "pack": "electron-builder --dir",

@@ -33,6 +33,7 @@ function createWindow() {
 
   mainWindow.on('closed', () => {
     mainWindow = null;
+    app.quit();
   });
 
   const pathname = path.resolve(__dirname, '..', 'renderer', 'index.html');
