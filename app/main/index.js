@@ -1,13 +1,10 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
-const fs = require('fs');
-const path = require('path');
-const url = require('url');
+const { app } = require('electron');
 const setupIpcListeners = require('./setup/ipcListeners');
 const setupWindow = require('./setup/window');
 const setupMenu = require('./setup/menu');
 
 // state lol!
-let appState = {
+const appState = {
   svg: null, // the currently rendered svg
   mainWindow: null, // the main window instance
   currentSource: null, // the currently opened file source
