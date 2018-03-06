@@ -16,11 +16,19 @@ const openedFiles = document.getElementById('opened-files');
 const preview = document.getElementById('preview');
 
 editor.getSession().on('change', delta => {
-  const src = editor
+  const found = openedFiles.querySelector(`li.active`);
+  let file = null;
+
+  if (found) {
+    file = found.dataset.file;
+  }
+
+  const source = editor
     .getSession()
     .getDocument()
     .getValue();
-  ipcRenderer.send('editor', src);
+
+  ipcRenderer.send('update', { file, source });
 });
 
 ipcRenderer.on('set-opened-files', (evt, fos) => {

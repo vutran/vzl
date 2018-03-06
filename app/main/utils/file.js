@@ -19,6 +19,19 @@ function getFile(file, list) {
   }
 }
 
+function update(file, source, app, appState) {
+  let fo = null;
+
+  if (hasFile(file, appState.openedFiles)) {
+    fo = getFile(file, appState.openedFiles);
+
+    // updates the source for the found file
+    fo.source = source;
+
+    appState.currentSource = fo.source;
+  }
+}
+
 function open(file, app, appState) {
   let fo = null;
 
@@ -56,4 +69,4 @@ function close(file, app, appState) {
   appState.mainWindow.webContents.send('close');
 }
 
-module.exports = { open, close };
+module.exports = { open, close, update };
