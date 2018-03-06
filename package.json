@@ -5,6 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "precommit": "lint-staged",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "start": "electron ./app/main/index.js"
@@ -18,11 +19,17 @@
   },
   "devDependencies": {
     "electron": "^1.8.2",
-    "electron-builder": "^20.2.0"
+    "electron-builder": "^20.2.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.0",
+    "prettier": "^1.11.1"
   },
   "dependencies": {
     "ace-builds": "^1.3.1",
     "viz.js": "^1.8.0"
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": ["prettier --write", "git add"]
   },
   "build": {
     "appId": "com.vutran.vzl"
