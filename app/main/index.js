@@ -43,6 +43,8 @@ function createWindow() {
         })
     );
 
+    mainWindow.openDevTools();
+
     const menu = Menu.buildFromTemplate([
         {
             label: 'File',

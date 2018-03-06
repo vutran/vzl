@@ -15,30 +15,47 @@ html, body {
 .sep {
     border-left: 1px solid #ccc;
     width: 0px;
-    height: 100vh;
+    height: calc(100vh - 40px);
 }
 
 #app {
     display: flex;
+    flex-direction: column;
+}
+
+#spacer {
+    height: 40px;
+}
+
+#app-panes {
+    flex: grow;
+    display: flex;
     flex-direction: row;
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 40px);
 }
 
 #editor {
-    padding: 50px 30px;
     width: 50%;
-    height: 100vh;
+    height: calc(100vh - 40px);
     border: 0px;
     outline: 0px;
 }
 
 #preview {
-    padding: 50px 30px;
+    padding: 40px 30px;
     display: flex;
     flex-direction: column;
     width: 50%;
-    height: 100%;
+    height: calc(100vh - 40px);
     align-items: center;
     text-align: center;
+}
+
+.ace-tm .ace_gutter {
+    background-color: transparent !important;
+}
+
+.ace-tm .ace_gutter-active-line {
+    background-color: rgba(0, 0, 0, 0.07) !important;
 }
