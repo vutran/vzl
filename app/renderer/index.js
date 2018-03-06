@@ -24,6 +24,10 @@ ipcRenderer.on('open', (evt, msg) => {
     editor.getSession().setValue(msg);
 });
 
+ipcRenderer.on('close', (evt, msg) => {
+    editor.getSession().reset();
+});
+
 // initial render
 document.addEventListener('DOMContentLoaded', () => {
     ipcRenderer.send('editor', editor.getSession().getDocument().getValue());

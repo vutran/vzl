@@ -12,13 +12,15 @@ const {
     shell,
 } = require('electron');
 
-let svg = null;
-
-let mainWindow = null;
+let svg = null; // the currently rendered svg
+let mainWindow = null; // the main window
+let currentSource = null; // the currently opened file source
+let currentFile = null; // the currently opened file
 
 ipcMain.on('editor', (evt, msg) => {
     try {
-        svg = Viz(msg);
+        currentSource = msg;
+        svg = Viz(currentSource);
         evt.sender.send('preview', svg);
     } catch (err) {}
 });
@@ -57,13 +59,22 @@ function createWindow() {
                             mainWindow,
                             filepaths => {
                                 if (filepaths.length > 0) {
-                                    const first = filepaths[0];
-                                    const src = fs.readFileSync(first, 'utf8');
-                                    mainWindow.webContents.send('open', src);
+                                    currentFile = filepaths[0];
+                                    currentSrc = fs.readFileSync(currentFile, 'utf8');
+                                    mainWindow.webContents.send('open', currentSrc);
                                 }
                             },
                         );
-                    }
+                    },
+                },
+                {
+                    label: 'Save',
+                    accelerator: 'CommandOrControl+S',
+                    click() {
+                        if (currentFile && currentSource !== null) {
+                            fs.writeFileSync(currentFile, currentSource, 'utf8');
+                        }
+                    },
                 },
                 {
                     label: 'Export as',
@@ -83,6 +94,14 @@ function createWindow() {
                             },
                         },
                     ],
+                },
+                {
+                    label: 'Close File',
+                    click() {
+                        currentSource = null;
+                        currentFile = null;
+                        mainWindow.webContents.send('close');
+                    },
                 },
                 {
                     label: 'Quit',
