@@ -50,19 +50,39 @@ function createWindow() {
             label: 'File',
             submenu: [
                 {
-                    label: 'Save',
-                    accelerator: 'CommandOrControl+S',
+                    label: 'Open',
+                    accelerator: 'CommandOrControl+O',
                     click() {
-                        dialog.showSaveDialog(
+                        dialog.showOpenDialog(
                             mainWindow,
-                            { defaultPath: 'Untitled.svg' },
-                            filename => {
-                                if (svg) {
-                                    fs.writeFile(filename, svg);
+                            filepaths => {
+                                if (filepaths.length > 0) {
+                                    const first = filepaths[0];
+                                    const src = fs.readFileSync(first, 'utf8');
+                                    mainWindow.webContents.send('open', src);
                                 }
-                            }
+                            },
                         );
-                    },
+                    }
+                },
+                {
+                    label: 'Export as',
+                    submenu: [
+                        {
+                            label: 'SVG',
+                            click() {
+                                dialog.showSaveDialog(
+                                    mainWindow,
+                                    { defaultPath: 'Untitled.svg' },
+                                    filename => {
+                                        if (filename && svg) {
+                                            fs.writeFile(filename, svg);
+                                        }
+                                    }
+                                );
+                            },
+                        },
+                    ],
                 },
                 {
                     label: 'Quit',

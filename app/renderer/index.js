@@ -1,5 +1,4 @@
 const { ipcRenderer } = require('electron');
-const Viz = require('viz.js');
 
 // global import
 require('ace-builds');
@@ -17,11 +16,15 @@ editor.getSession().on('change', (delta) => {
     ipcRenderer.send('editor', src);
 });
 
+ipcRenderer.on('preview', (evt, msg) => {
+    preview.innerHTML = msg;
+});
+
+ipcRenderer.on('open', (evt, msg) => {
+    editor.getSession().setValue(msg);
+});
+
 // initial render
 document.addEventListener('DOMContentLoaded', () => {
     ipcRenderer.send('editor', editor.getSession().getDocument().getValue());
-});
-
-ipcRenderer.on('preview', (evt, msg) => {
-    preview.innerHTML = msg;
 });
