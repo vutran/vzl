@@ -2,7 +2,7 @@
   "name": "vzl",
   "productName": "Vzl",
   "version": "0.0.0",
-  "description": "",
+  "description": "Minimal Visualization Editor",
   "main": "app/main/index.js",
   "scripts": {
     "precommit": "lint-staged",
