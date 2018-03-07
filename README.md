@@ -28,3 +28,7 @@ Like what you see? [Become a Patron](https://www.patreon.com/vutran) and support
 ## Special Thanks
 
 * [mdaine](https://github.com/mdaines/) for providing the wonderful [`viz.js`](https://github.com/mdaines/viz.js) library
+
+## License
+
+MIT © [Vu Tran](https://github.com/vutran)
