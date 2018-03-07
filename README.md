@@ -1,5 +1,5 @@
 <h1 align="center"><img src="./logo.png?raw=true" alt="Vzl" title="Vzl" width="300" /></h1>
-<h2 align="center">Minimal Visualization Editor</h2>
+<div align="center">Minimal Visualization Editor</div>
 
 ---
 
