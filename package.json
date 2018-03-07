@@ -1,7 +1,7 @@
 {
   "name": "vzl",
   "productName": "Vzl",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Minimal Visualization Editor",
   "main": "app/main/index.js",
   "scripts": {
@@ -29,7 +29,10 @@
     "viz.js": "^1.8.0"
   },
   "lint-staged": {
-    "*.{js,json,css,md}": ["prettier --write", "git add"]
+    "*.{js,json,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "build": {
     "appId": "com.vutran.vzl"
