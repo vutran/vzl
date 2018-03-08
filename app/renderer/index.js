@@ -1,6 +1,7 @@
 // todo(vutran) - move to React or some alternative templating engine
 const path = require('path');
 const { ipcRenderer } = require('electron');
+const Viz = require('viz.js');
 
 // global import
 require('ace-builds');
@@ -21,13 +22,20 @@ function getValue() {
     .getValue();
 }
 
-editor.getSession().on('change', () => {
-  ipcRenderer.send('update', getValue());
-});
+function updatePreview(val) {
+  try {
+    const svg = Viz(val);
+    preview.innerHTML = svg;
+  } catch (err) {}
+}
 
-ipcRenderer.on('preview', (evt, contents) => {
-  preview.innerHTML = contents;
-});
+function render() {
+  const val = getValue();
+  ipcRenderer.send('update', val);
+  updatePreview(val);
+}
+
+editor.getSession().on('change', render);
 
 ipcRenderer.on('open', (evt, fo) => {
   title.innerHTML = fo.file;
@@ -35,6 +43,4 @@ ipcRenderer.on('open', (evt, fo) => {
 });
 
 // initial render
-document.addEventListener('DOMContentLoaded', () => {
-  ipcRenderer.send('update', getValue());
-});
+document.addEventListener('DOMContentLoaded', render);

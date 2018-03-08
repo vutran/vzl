@@ -18,6 +18,10 @@ function createWindow() {
   setupIpcListeners(app, appState);
   setupWindow(app, appState);
   setupMenu(app, appState);
+
+  if (process.env.NODE_ENV === 'development') {
+    appState.mainWindow.webContents.openDevTools();
+  }
 }
 
 app.on('ready', createWindow);

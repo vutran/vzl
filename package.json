@@ -8,7 +8,7 @@
     "precommit": "lint-staged",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "start": "electron ./app/main/index.js"
+    "start": "cross-env NODE_ENV=development electron ./app/main/index.js"
   },
   "author": "Vu Tran <vu@vu-tran.com>",
   "license": "MIT",
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "ace-builds": "^1.3.1",
+    "cross-env": "^5.1.3",
     "viz.js": "^1.8.0"
   },
   "lint-staged": {
