@@ -42,5 +42,29 @@ ipcRenderer.on('open', (evt, fo) => {
   editor.getSession().setValue(fo.source);
 });
 
+ipcRenderer.on('export-svg', (evt, fo) => {
+  try {
+    const svg = Viz(fo.source);
+    evt.sender.send('export', {
+      file: fo.file,
+      type: 'svg',
+      data: svg,
+    });
+  } catch (err) {}
+});
+
+ipcRenderer.on('export-png', (evt, fo) => {
+  try {
+    const svg = Viz(fo.source);
+    Viz.svgXmlToPngBase64(svg, 1, (err, data) => {
+      evt.sender.send('export', {
+        file: fo.file,
+        type: 'png',
+        data,
+      });
+    });
+  } catch (err) {}
+});
+
 // initial render
 document.addEventListener('DOMContentLoaded', render);

@@ -5,7 +5,6 @@ const setupMenu = require('./setup/menu');
 
 // state lol!
 const appState = {
-  svg: null, // the currently rendered svg
   mainWindow: null, // the main window instance
   fo: {
     // the currently opened file

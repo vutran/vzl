@@ -13,4 +13,18 @@ function open(file, app, appState) {
   appState.mainWindow.webContents.send('open', appState.fo);
 }
 
-module.exports = { open, update };
+function exportAsSVG(file, app, appState) {
+  appState.mainWindow.webContents.send(
+    'export-svg',
+    Object.assign({}, appState.fo, { file })
+  );
+}
+
+function exportAsPNG(file, app, appState) {
+  appState.mainWindow.webContents.send(
+    'export-png',
+    Object.assign({}, appState.fo, { file })
+  );
+}
+
+module.exports = { open, update, exportAsSVG, exportAsPNG };

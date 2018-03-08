@@ -24,6 +24,7 @@ module.exports = (app, appState) => {
           accelerator: 'CommandOrControl+S',
           click() {
             if (appState.fo.file && appState.fo.source !== null) {
+              // todo(vutran) - move to utils/file.js
               fs.writeFileSync(appState.fo.file, appState.fo.source, 'utf8');
             }
           },
@@ -38,8 +39,22 @@ module.exports = (app, appState) => {
                   appState.mainWindow,
                   { defaultPath: 'Untitled.svg' },
                   filename => {
-                    if (filename && appState.svg) {
-                      fs.writeFile(filename, appState.svg);
+                    if (filename) {
+                      file.exportAsSVG(filename, app, appState);
+                    }
+                  }
+                );
+              },
+            },
+            {
+              label: 'PNG',
+              click() {
+                dialog.showSaveDialog(
+                  appState.mainWindow,
+                  { defaultPath: 'Untitled.png' },
+                  filename => {
+                    if (filename) {
+                      file.exportAsPNG(filename, app, appState);
                     }
                   }
                 );
