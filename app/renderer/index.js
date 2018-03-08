@@ -2,6 +2,7 @@
 const path = require('path');
 const { ipcRenderer } = require('electron');
 const Viz = require('viz.js');
+const debounce = require('debounce');
 
 // global import
 require('ace-builds');
@@ -35,7 +36,7 @@ function render() {
   updatePreview(val);
 }
 
-editor.getSession().on('change', render);
+editor.getSession().on('change', debounce(render, 200));
 
 ipcRenderer.on('open', (evt, fo) => {
   title.innerHTML = fo.file;
