@@ -1,7 +1,7 @@
 {
   "name": "vzl",
   "productName": "Vzl",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Minimal Visualization Editor",
   "main": "app/main/index.js",
   "scripts": {
