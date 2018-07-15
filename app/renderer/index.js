@@ -2,12 +2,14 @@
 const path = require('path');
 const { ipcRenderer } = require('electron');
 const Viz = require('viz.js');
+const { Module, render } = require('viz.js/full.render');
 const debounce = require('debounce');
 
 // global import
 require('ace-builds');
-require('ace-builds/src/mode-dot.js');
+require('ace-builds/src-noconflict/mode-dot.js');
 
+let viz = new Viz({ Module, render });
 const editor = ace.edit('editor', {
   mode: 'ace/mode/dot',
   showFoldWidgets: false,
@@ -24,19 +26,25 @@ function getValue() {
 }
 
 function updatePreview(val) {
-  try {
-    const svg = Viz(val);
-    preview.innerHTML = svg;
-  } catch (err) {}
+  viz
+    .renderString(val)
+    .then(result => {
+      preview.innerHTML = result;
+    })
+    .catch(err => {
+      // creates a new Viz instance
+      // ref: https://github.com/mdaines/viz.js/wiki/Caveats#rendering-graphs-with-user-input
+      viz = new Viz({ Module, render });
+    });
 }
 
-function render() {
+function renderViz() {
   const val = getValue();
   ipcRenderer.send('update', val);
   updatePreview(val);
 }
 
-editor.getSession().on('change', debounce(render, 200));
+editor.getSession().on('change', debounce(renderViz, 200));
 
 ipcRenderer.on('open', (evt, fo) => {
   title.innerHTML = fo.file;
@@ -68,4 +76,4 @@ ipcRenderer.on('export-png', (evt, fo) => {
 });
 
 // initial render
-document.addEventListener('DOMContentLoaded', render);
+document.addEventListener('DOMContentLoaded', renderViz);
